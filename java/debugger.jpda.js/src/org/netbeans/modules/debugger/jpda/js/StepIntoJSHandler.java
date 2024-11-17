@@ -64,7 +64,7 @@ import org.openide.util.Exceptions;
 @LazyActionsManagerListener.Registration(path="netbeans-JPDASession/Java")
 public class StepIntoJSHandler extends LazyActionsManagerListener implements PropertyChangeListener {
     
-    private static final String SCRIPT_ACCESS_CLASS = "jdk.nashorn.internal.runtime.ScriptFunctionData";    // NOI18N
+    private static final String SCRIPT_ACCESS_CLASS = "org.openjdk.nashorn.internal.runtime.ScriptFunctionData";    // NOI18N
     private static final String[] SCRIPT_ACCESS_METHODS = { "invoke", "construct" };        // NOI18N
     // New notifyInvoke API:
     private static final String SCRIPT_NOTIFY_INVOKE_METHOD = "notifyInvoke";   // NOI18N
@@ -96,7 +96,9 @@ public class StepIntoJSHandler extends LazyActionsManagerListener implements Pro
             scriptAccessBPs[i] = mb;
         }
         ScriptInvokeBPListener sibl = new ScriptInvokeBPListener();
-        notifyInvokeBP = MethodBreakpoint.create(DebuggerSupport.DEBUGGER_SUPPORT_CLASS,
+        // try which Nashorn debugger is available
+        String debugSupportClass = !debugger.getClassesByName(DebuggerSupport.DEBUGGER_SUPPORT_CLASS_JDK).isEmpty() ? DebuggerSupport.DEBUGGER_SUPPORT_CLASS_JDK : DebuggerSupport.DEBUGGER_SUPPORT_CLASS_EXT;
+        notifyInvokeBP = MethodBreakpoint.create(debugSupportClass,
                                                  SCRIPT_NOTIFY_INVOKE_METHOD);
         notifyInvokeBP.setMethodSignature(SCRIPT_NOTIFY_INVOKE_METHOD_SIG);
         notifyInvokeBP.setHidden(true);
