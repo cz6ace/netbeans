@@ -315,10 +315,8 @@ public class CallStackFrameImpl implements CallStackFrame {
                 // Check Nashorn:
                 String sourcePath = getSourcePath(null);
                 if (sourcePath.startsWith("org/openjdk/nashorn/internal/scripts/") ||       // NOI18N
-                    sourcePath.startsWith("org\\openjdk\\nashorn\\internal\\scripts\\")) {   // NOI18N
-                    s = "JS";                                                   // NOI18N
-                    as = Collections.singletonList(s);
-                } else if (sourcePath.startsWith("jdk/nashorn/internal/scripts/") ||       // NOI18N
+                    sourcePath.startsWith("org\\openjdk\\nashorn\\internal\\scripts\\") ||   // NOI18N
+                    sourcePath.startsWith("jdk/nashorn/internal/scripts/") ||       // NOI18N
                     sourcePath.startsWith("jdk\\nashorn\\internal\\scripts\\")) {   // NOI18N
                     s = "JS";                                                   // NOI18N
                     as = Collections.singletonList(s);
