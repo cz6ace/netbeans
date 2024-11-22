@@ -101,7 +101,8 @@ public class JSVariable {
         if (classType == null) {
             return null;
         }
-        boolean isScript = classType.isInstanceOf("org.openjdk.nashorn.internal.runtime.ScriptObject"); // NOI18N
+        boolean isScript = classType.isInstanceOf("jdk.nashorn.internal.runtime.ScriptObject") ||  // NOI18N
+                classType.isInstanceOf("org.openjdk.nashorn.internal.runtime.ScriptObject"); // NOI18N
         if (!isScript) {
             return null;
         }
