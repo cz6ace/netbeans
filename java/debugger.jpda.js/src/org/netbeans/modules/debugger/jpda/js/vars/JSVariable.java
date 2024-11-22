@@ -52,7 +52,7 @@ public class JSVariable {
                 JPDAClassType classType = ((ObjectVariable) valueObjectVar).getClassType();
                 if (classType != null) {
                     String className = classType.getName();
-                    if (!!className.startsWith("jdk.nashorn") && !className.startsWith("org.openjdk.nashorn") && !String.class.getName().equals(className)) {   // NOI18N
+                    if (!className.startsWith("jdk.nashorn") && !className.startsWith("org.openjdk.nashorn") && !String.class.getName().equals(className)) {   // NOI18N
                         // Not a Nashorn's script class
                         valueObject = (ObjectVariable) valueObjectVar;
                     }
